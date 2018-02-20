@@ -66,51 +66,102 @@ public class ATMSystem {
 			do {
 				System.out.println("Enter your choice of ATM");
 				userInput = in.nextLine();
-				if(userInput.toLowerCase().equals("atm_1a")) {
+				if(userInput.toLowerCase().equals("atm1_a")) {
 					currentATM = firstATMA;
-				} else if(userInput.toLowerCase().equals("atm_2a")) {
+				} else if(userInput.toLowerCase().equals("atm2_a")) {
 					currentATM = secondATMA;
-				} else if(userInput.toLowerCase().equals("atm_1b")) {
+				} else if(userInput.toLowerCase().equals("atm1_b")) {
 					currentATM = firstATMB;
-				} else if (userInput.toLowerCase().equals("atm_2b")) {
+				} else if (userInput.toLowerCase().equals("atm2_b")) {
 					currentATM = secondATMB;
 				} else {
 					System.out.println("This ATM does not exit.");
 				}
 			} while(currentATM == null);
 			
-			// Ask for a card id
+			// Ask for a card id that is valid, keep asking until a valid card id is given
+			boolean validATM = false;
+			boolean notExpired = false;
 			do {
-				System.out.println("Enter your card");
-				userInput = in.nextLine();
-				// Check if the card in the array of cards from bank A
-				for(CashCard element : listOfCardsBankA) {
-					if(element.getId().toLowerCase().equals(userInput.toLowerCase())) {
-						currentCard = element;
-						break;
-					}
-				}
-				// Check if the card is in the array of cards from bank B (only is was not found yet)
-				if (currentCard == null) {
-					for(CashCard element : listOfCardsBankB) {
-						if(element.getId().toLowerCase().equals(userInput.toLowerCase())) {
+				// Ask for the card
+				do {
+
+					System.out.println("Enter your card");
+					userInput = in.nextLine();
+					// Check if the card in the array of cards from bank A
+					for (CashCard element : listOfCardsBankA) {
+						if (element.getId().toLowerCase().equals(userInput.toLowerCase())) {
 							currentCard = element;
 							break;
 						}
 					}
+					// Check if the card is in the array of cards from bank B (only is was not found
+					// yet)
+					if (currentCard == null) {
+						for (CashCard element : listOfCardsBankB) {
+							if (element.getId().toLowerCase().equals(userInput.toLowerCase())) {
+								currentCard = element;
+								break;
+							}
+						}
+					}
+				} while (currentCard == null);
+				
+				// Check if the card is supported by the ATM
+				validATM = currentATM.validateCardSuport(currentCard);
+				if(!validATM) {
+					System.out.println("This card is not supported by this ATM");
+				} else {
+					// Check if the card is not expired
+					notExpired = currentATM.validateCardExpirationDate(currentCard);
+					if(!notExpired) {
+						System.out.println("This card is expired and returned to you");
+					}
 				}
-			} while(currentCard == null);
+			} while (!validATM & !notExpired);
+			
+			// Ask for the password
+			do {
+				System.out.println("The card is accepted. Please enter your password.");
+				userInput = in.nextLine();
+				if (!currentATM.validatePassword(currentCard, userInput)) {
+					System.out.println("This is the wrong password. Enter your password.");
+				}
+			} while (!currentATM.validatePassword(currentCard, userInput));
+			System.out.println("“Authorization is accepted. Start your transaction by entering the amount to withdraw.");
 
+			// Try to withdraw money from using the card
+			// Validate the amount is less than the maximum that can be withdrawn in one transaction.
+			int amount = 0;
+			do {
+				if (in.hasNextInt()) {
+					amount = in.nextInt();
+				}
+				in.nextLine();
+				if (amount > currentATM.getMaxWithdrawn()) {
+					System.out.println("This amount exceeds the maximum amount you can withdraw per transaction. Please enter the amount or quit.");
+				}
+			} while(amount > currentATM.getMaxWithdrawn());
 			
+			// Try to withdraw
+			boolean success = false;
+			do {
+				success = currentATM.withdraw(currentCard, amount);
+				if(success) {
+					System.out.println(amount + "$ is withdrawn from your account. The remaining balance if this account is "+ currentATM.getAccountBalance(currentCard) +" $. If you have more transactions, enter the amount or quit. - Anything else will bring you back to the choice of ATM");
+				} else {
+					System.out.println("The amount exceeds the current balance. Enter another amount or quit.");
+				}
+				if(in.hasNextInt()) {
+					amount = in.nextInt();
+					success = false;	// does not exit the do/while loop to withdraw more money
+					in.nextLine();
+				} else {
+					userInput = in.nextLine();
+				}
+			} while(!success && userInput.toLowerCase().equals("quit"));
 			
-			
-			
-			
-			
-			
-			
-			
-			
+			// Reinitialize the current card and ATM before starting the main loop again.
 			currentATM = null;
 			currentCard = null;
 		}

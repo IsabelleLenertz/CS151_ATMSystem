@@ -34,7 +34,7 @@ public class Bank {
 	public CashCard openAccount(double initialBalance, String initialPW) {
 		int id = this.listOfAccounts.size() + 1;
 		this.listOfAccounts.add(new Account(initialBalance, id));
-		CashCard card = new CashCard(this.name, this.listOfAccounts.get(this.listOfAccounts.size()-1).getAccountId(), initialPW);
+		CashCard card = new CashCard(this.name, id, initialPW);
 		
 		return card;
 	}
@@ -68,5 +68,13 @@ public class Bank {
 		return false;
 	}
 	
+	/**
+	 * Look up an account linked to a cash card and return the balance of that account
+	 * @param card card to look up
+	 * @return
+	 */
+	public double getAccountBalance(CashCard card) {
+		return this.listOfAccounts.get(card.getAccountId()-1).getBalance();
+	}
 	
 }

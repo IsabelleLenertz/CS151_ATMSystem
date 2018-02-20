@@ -52,7 +52,7 @@ public class CashCard {
 	 * @return true is the card is not expired
 	 */
 	public boolean isExpired() {
-		return this.expirationDate.isAfter(LocalDate.now());
+		return this.expirationDate.isBefore(LocalDate.now());
 	}
 	
 
@@ -62,7 +62,7 @@ public class CashCard {
 	 */
 	@Override
 	public String toString() {
-		return "Cash Card (bankid: " + this.bankAffiliation + ", account number #: " + this.accountAffiliation + "), expires on " + this.expirationDate.toString() + ", password " + this.password;
+		return "Cash Card (cardId: " + this.getId() + ", bankid: " + this.bankAffiliation + ", account number #: " + this.accountAffiliation + "), expires on " + this.expirationDate.toString() + ", password " + this.password;
 	}
 	
 

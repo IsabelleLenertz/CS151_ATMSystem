@@ -46,16 +46,24 @@ public class ATM {
 		return bank.authorizeAccountAccess(card,  password);
 	}
 	
-	public String withdraw(CashCard card, double amount) {
-		if (amount > this.maxWithdrawn) {
-			return "This amount exceeds the maximum amount you can withdraw per transaction. Please enter the amount or quit.";
-		}
-		else if( this.bank.withdraw(card, amount)) {
-			return amount + "is withdrawn from your account. The remaining balance in the account is . If you have more transactions, enter the amount or quit.";
-		}
-		else {
-			return "The amount exceeds the current balance. Enter another amount or quit.";
-		}
+	/**
+	 * Return the balance of the account linked to the card
+	 * @param card card inserted in the ATM
+	 * @return balance of the account
+	 */
+	public double getAccountBalance(CashCard card) {
+		return this.bank.getAccountBalance(card);
+		
+	}
+	
+	/**
+	 * Withdraw money from the account linked to the card and give it to the user
+	 * @param card card in the ATM
+	 * @param amount amount to withdraw
+	 * @return true if the withdraw was successful (sufficient balance)
+	 */
+	public boolean withdraw(CashCard card, double amount) {
+		return this.bank.withdraw(card, amount);
 	}
 
 }

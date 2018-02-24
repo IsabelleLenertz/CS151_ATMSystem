@@ -1,5 +1,15 @@
+/**
+ * License info: this software was written and belongs to Isabelle Delmas. Ask authorization before use, no commercial use allowed. Contact info: isabelle@delmas.us
+ */
+
 import java.util.ArrayList;
 
+/**
+ * Class representing a bank account
+ * @author Isabelle Delmas
+ * Created: 2018-02-20
+ *
+ */
 public class Account {
 	
 	private Double balance;

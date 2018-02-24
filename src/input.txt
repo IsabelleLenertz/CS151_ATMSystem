@@ -1,0 +1,20 @@
+atm1_a
+bankofb2
+bankofa1
+bankofa2
+cat
+dog
+40
+35
+5
+anything else
+atm2_b
+bankofa1
+bankofb2
+mouse
+parrot
+951
+41
+40
+-1
+quit

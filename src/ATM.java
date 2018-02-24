@@ -1,4 +1,14 @@
+/**
+ * License info: this software was written and belongs to Isabelle Delmas. Ask authorization before use, no commercial use allowed. Contact info: isabelle@delmas.us
+ */
 
+
+/**
+ * Represent an ATM machine
+ * @author Isabelle Delmas
+ * Created: 2018-02-20
+ *
+ */
 public class ATM {
 	private Bank bank;
 	private int maxWithdrawn;
@@ -13,7 +23,10 @@ public class ATM {
 		this.maxWithdrawn = max;
 	}
 	
-	
+	/**
+	 * Get the maximum the can be withdrawn at once
+	 * @return the maximum amount of money withdrawn at once
+	 */
 	public int getMaxWithdrawn() {
 		return this.maxWithdrawn;
 	}

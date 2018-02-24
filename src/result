@@ -1,0 +1,67 @@
+States of two Banks  
+
+Assume all accounts have $40.0 preloaded.
+BankOfA( 3 customers)
+Customer - Cash Card (cardId: BankOfA1, bankid: BankOfA, account number #: 1), expires on 2016-12-12, password cat
+Customer - Cash Card (cardId: BankOfA2, bankid: BankOfA, account number #: 2), expires on 2021-02-23, password dog
+Customer - Cash Card (cardId: BankOfA3, bankid: BankOfA, account number #: 3), expires on 2021-02-23, password bird
+
+BankOfB( 3 customers)
+Customer - Cash Card (cardId: BankOfB1, bankid: BankOfB, account number #: 1), expires on 2016-12-12, password bunny
+Customer - Cash Card (cardId: BankOfB2, bankid: BankOfB, account number #: 2), expires on 2021-02-23, password parrot
+Customer - Cash Card (cardId: BankOfB3, bankid: BankOfB, account number #: 3), expires on 2021-02-23, password mouse
+
+ATM1_A: (ATM1 fromBankOfA) The maximum amount of cash a card can widthraw per day: $35
+ATM2_A: (ATM2 fromBankOfA) The maximum amount of cash a card can widthraw per day: $150
+ATM1_B: (ATM1 fromBankOfB) The maximum amount of cash a card can widthraw per day: $300
+ATM2_B: (ATM2 fromBankOfB) The maximum amount of cash a card can widthraw per day: $900
+Enter your choice of ATM
+atm1_a
+Enter your card
+bankofb2
+This card is not supported by this ATM
+Enter your card
+bankofa1
+This card is expired and returned to you
+Enter your card
+bankofa2
+The card is accepted
+Please enter your password.
+cat
+This is the wrong password.
+Please enter your password.
+dog
+Authorization is accepted. Start your transaction by entering the amount to withdraw.
+40
+This amount exceeds the maximum amount you can withdraw per transaction. Please enter the amount or quit.
+35
+35$ is withdrawn from your account. The remaining balance if this account is 5.0 $. If you have more transactions, enter the amount or quit. - Anything else will bring you back to the choice of ATM
+5
+5$ is withdrawn from your account. The remaining balance if this account is 0.0 $. If you have more transactions, enter the amount or quit. - Anything else will bring you back to the choice of ATM
+anything else
+Enter your choice of ATM
+atm2_b
+Enter your card
+bankofa1
+This card is not supported by this ATM
+Enter your card
+bankofa1
+This card is not supported by this ATM
+Enter your card
+bankofb2
+The card is accepted
+Please enter your password.
+mouse
+This is the wrong password.
+Please enter your password.
+parrot
+Authorization is accepted. Start your transaction by entering the amount to withdraw.
+951
+This amount exceeds the maximum amount you can withdraw per transaction. Please enter the amount or quit.
+41
+The amount exceeds the current balance. Enter another amount or quit.
+40
+40$ is withdrawn from your account. The remaining balance if this account is 0.0 $. If you have more transactions, enter the amount or quit. - Anything else will bring you back to the choice of ATM
+-1
+The amount exceeds the current balance. Enter another amount or quit.
+quit

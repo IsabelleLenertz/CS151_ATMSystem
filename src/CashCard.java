@@ -1,6 +1,16 @@
-import java.time.LocalDate;
+/**
+ * License info: this software was written and belongs to Isabelle Delmas. Ask authorization before use, no commercial use allowed. Contact info: isabelle@delmas.us
+ */
 
+import java.time.LocalDate;
+/**
+ * Represent a card use to access an account and withdraw money
+ * @author Isabelle Delmas
+ * Created: 2018-02-20
+ *
+ */
 public class CashCard {
+	
 	private String bankAffiliation;
 	private int accountAffiliation;
 	private LocalDate expirationDate;
@@ -29,6 +39,12 @@ public class CashCard {
 		return this.password.equals(word);
 	}
 	
+	/**
+	 * Define the expiration date
+	 * @param year year of the expiration date
+	 * @param month month of the expiration date
+	 * @param day day of the expiration date
+	 */
 	public void setExpirationDate(int year, int month, int day) {
 		this.expirationDate = LocalDate.of(year, month, day);
 	}
@@ -40,13 +56,22 @@ public class CashCard {
 		return this.bankAffiliation + this.accountAffiliation;
 	}
 	
+	/**
+	 * Get the bank associated with the card
+	 * @return bank associated with the card
+	 */
 	public String getBank() {
 		return this.bankAffiliation;
 	}
 	
+	/**
+	 * Get the account associated with the card
+	 * @return account associated with the card
+	 */
 	public int getAccountId() {
 		return this.accountAffiliation;
 	}
+	
 	/**
 	 * Check if the card is expired
 	 * @return true is the card is not expired

@@ -1,7 +1,17 @@
+/**
+ * License info: this software was written and belongs to Isabelle Delmas. Ask authorization before use, no commercial use allowed. Contact info: isabelle@delmas.us
+ */
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
+/**
+ * Represent a bank that holds bank accounts
+ * @author Isabelle Delmas
+ * Created: 2018-02-20
+ * Updated: 2018-02-23		Reason: does not allow withdrawal of negative amount of money
+ *
+ */
 public class Bank {
 	ArrayList<Account> listOfAccounts = new ArrayList<>();
 	String name;
@@ -22,9 +32,14 @@ public class Bank {
 		return this.name;
 	}
 	
+	/**
+	 * Get the number of accounts open in the bank
+	 * @return number of accounts open in the bank
+	 */
 	public int getNumberOfCustomer() {
 		return this.listOfAccounts.size();
 	}
+	
 	/**
 	 * Open a new account with a specified balance and password. the id is defined in the order the accounts were added.
 	 * @param initialBalance money initially put in the new account
@@ -45,6 +60,7 @@ public class Bank {
 	 * @param password password entered by the user
 	 * @return
 	 */
+	
 	public boolean authorizeAccountAccess(CashCard card, String password) {
 		return card.checkPassword(password);
 	}
@@ -57,6 +73,9 @@ public class Bank {
 	 * @return true if the action was successful 
 	 */
 	public boolean withdraw(CashCard card, double amount) {
+		// Cannot withdraw a negative amount
+		if(amount < 0) { return false;}
+		
 		// Removes money from the account, return true id successful
 		if( this.listOfAccounts.get(card.getAccountId() - 1).withdraw(amount)) {
 			String log = "Withdraw of " + amount + " by card with id " + card.getId()+ " on " + LocalDate.now().toString();
